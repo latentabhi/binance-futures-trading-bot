@@ -12,12 +12,24 @@ console = Console()
 
 @app.command()
 def trade(
-    symbol: str = typer.Argument(...),
-    side: str = typer.Argument(...),
-    order_type: str = typer.Argument(...),
-    qty: float = typer.Argument(...),
-    price: float = typer.Option(None, "--price", "-p")
+    symbol: str = typer.Argument(None, help="Trading symbol, e.g. BTCUSDT"),
+    side: str = typer.Argument(None, help="BUY or SELL"),
+    order_type: str = typer.Argument(None, help="MARKET, LIMIT, or STOP_MARKET"),
+    qty: float = typer.Argument(None, help="Quantity to trade"),
+    price: float = typer.Option(None, "--price", "-p", help="Order price")
 ):
+    # If no arguments passed, guide the user interactively
+    if not symbol:
+        symbol = typer.prompt("Enter Symbol (e.g. BTCUSDT)")
+    if not side:
+        side = typer.prompt("Enter Side (BUY/SELL)")
+    if not order_type:
+        order_type = typer.prompt("Enter Order Type (MARKET/LIMIT/STOP_MARKET)")
+    if not qty:
+        qty = typer.prompt("Enter Quantity", type=float)
+    if order_type.upper() in ["LIMIT", "STOP_MARKET"] and not price:
+        price = typer.prompt("Enter Price", type=float)
+
     try:
         side_val = validate_side(side)
         type_val = validate_order_type(order_type)
