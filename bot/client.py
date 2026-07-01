@@ -12,11 +12,10 @@ class ClientWrapper:
         secret = os.getenv("BINANCE_API_SECRET")
         
         if not key or not secret:
-            logger.warning("missing API keys in env")
+            logger.warning("API keys not found in environment")
             
-        # force testnet URL
         base = "https://testnet.binancefuture.com"
-        logger.info(f"connecting to {base}")
+        logger.info(f"Init client with base URL: {base}")
         
         self.client = UMFutures(key=key, secret=secret, base_url=base)
 

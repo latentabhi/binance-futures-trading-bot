@@ -25,17 +25,17 @@ def execute_trade(symbol: str, side: str, type: str, qty: float, price: float = 
              raise ValueError("need a stop price for STOP_MARKET")
         params["stopPrice"] = price
 
-    logger.info(f"sending {params['type']} {params['side']} order for {qty} {params['symbol']}")
-    logger.debug(f"payload: {params}")
+    logger.info(f"Placing {params['type']} {params['side']} order: {qty} {params['symbol']}")
+    logger.debug(f"Request parameters: {params}")
 
     try:
         res = client.new_order(**params)
-        logger.info(f"order success -> ID: {res.get('orderId')}")
-        logger.debug(f"full resp: {res}")
+        logger.info(f"Order placed successfully. ID: {res.get('orderId')}")
+        logger.debug(f"API response: {res}")
         return res
     except ClientError as e:
-        logger.error(f"api failed: {e.status_code} | {e.error_message}")
+        logger.error(f"Binance API error: {e.error_message} (status_code={e.status_code})")
         raise ValueError(e.error_message)
     except Exception as e:
-        logger.error(f"random error: {e}")
+        logger.error(f"Unexpected error: {e}")
         raise e
