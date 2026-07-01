@@ -1,0 +1,7 @@
+.env
+trading_bot.log
+__pycache__/
+bot/__pycache__/
+.idea/
+.vscode/
+*.pyc

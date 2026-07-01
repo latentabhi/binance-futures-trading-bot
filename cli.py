@@ -1,0 +1,65 @@
+import typer
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+
+from bot.orders import execute_trade
+from bot.validators import validate_side, validate_order_type, validate_quantity
+
+app = typer.Typer(help="binance futures testnet bot")
+console = Console()
+
+@app.command()
+def trade(
+    symbol: str = typer.Argument(...),
+    side: str = typer.Argument(...),
+    order_type: str = typer.Argument(...),
+    qty: float = typer.Argument(...),
+    price: float = typer.Option(None, "--price", "-p")
+):
+    try:
+        side_val = validate_side(side)
+        type_val = validate_order_type(order_type)
+        qty_val = validate_quantity(qty)
+    except ValueError as e:
+        console.print(f"[bold red]bad input:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+    console.print(Panel(
+        f"[bold blue]preparing order[/bold blue]\n"
+        f"symbol: {symbol.upper()}\n"
+        f"side: {side_val}\n"
+        f"type: {type_val}\n"
+        f"qty: {qty_val}\n"
+        f"price: {price if price else 'none'}",
+        expand=False
+    ))
+
+    try:
+        data = execute_trade(
+            symbol=symbol,
+            side=side_val,
+            type=type_val,
+            qty=qty_val,
+            price=price
+        )
+        
+        table = Table(title="[bold green]order success[/bold green]")
+        table.add_column("field", style="cyan")
+        table.add_column("value", style="magenta")
+
+        table.add_row("id", str(data.get("orderId", "N/A")))
+        table.add_row("status", str(data.get("status", "N/A")))
+        table.add_row("filled qty", str(data.get("executedQty", "N/A")))
+        table.add_row("avg price", str(data.get("avgPrice", "N/A")))
+
+        console.print(table)
+    except Exception as e:
+        console.print(Panel(
+            f"[bold red]failed:[/bold red]\n{str(e)}",
+            expand=False,
+            border_style="red"
+        ))
+
+if __name__ == "__main__":
+    app()
