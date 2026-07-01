@@ -18,7 +18,6 @@ def trade(
     qty: float = typer.Argument(None, help="Quantity to trade"),
     price: float = typer.Option(None, "--price", "-p", help="Order price")
 ):
-    # If no arguments passed, guide the user interactively
     if not symbol:
         symbol = typer.prompt("Enter Symbol (e.g. BTCUSDT)")
     if not side:
@@ -57,7 +56,7 @@ def trade(
             price=price
         )
         
-        # wait a split second for match engine to fill, then query status
+        # get fill status update
         order_id = data.get("orderId")
         if order_id:
             time.sleep(0.5)
@@ -73,7 +72,6 @@ def trade(
         table.add_row("status", str(data.get("status", "N/A")))
         table.add_row("filled qty", str(data.get("executedQty", "N/A")))
         
-        # average price calculation
         avg_price = data.get("avgPrice")
         if avg_price and float(avg_price) > 0:
             table.add_row("avg price", str(avg_price))

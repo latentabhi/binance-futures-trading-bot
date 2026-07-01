@@ -12,14 +12,12 @@ def execute_trade(symbol: str, side: str, type: str, qty: float, price: float = 
         "quantity": qty,
     }
 
-    # limits need a price
     if params["type"] == "LIMIT":
         if not price:
             raise ValueError("need a price for LIMIT")
         params["price"] = price
-        params["timeInForce"] = "GTC" # good till cancel
+        params["timeInForce"] = "GTC"
 
-    # stops also need a price trigger
     if params["type"] == "STOP_MARKET":
         if not price:
              raise ValueError("need a stop price for STOP_MARKET")

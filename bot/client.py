@@ -7,7 +7,6 @@ load_dotenv()
 
 class ClientWrapper:
     def __init__(self):
-        # grab keys from env
         key = os.getenv("BINANCE_API_KEY")
         secret = os.getenv("BINANCE_API_SECRET")
         
