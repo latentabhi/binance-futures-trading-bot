@@ -1,0 +1,10 @@
+2026-07-01 12:43:23,548 - binance_bot - INFO - Init client with base URL: https://testnet.binancefuture.com
+2026-07-01 12:43:23,549 - binance_bot - INFO - Placing MARKET BUY order: 0.001 BTCUSDT
+2026-07-01 12:43:23,550 - binance_bot - DEBUG - Request parameters: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001}
+2026-07-01 12:43:24,534 - binance_bot - INFO - Order placed successfully. ID: 18179792672
+2026-07-01 12:43:24,534 - binance_bot - DEBUG - API response: {'orderId': 18179792672, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'ysd24CvvKke7rqiHlRCy9Z', 'price': '0.00', 'origQty': '0.0010', 'executedQty': '0.0000', 'cumQty': '0.0000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'BOTH', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1782890004329}
+2026-07-01 12:43:30,458 - binance_bot - INFO - Init client with base URL: https://testnet.binancefuture.com
+2026-07-01 12:43:30,458 - binance_bot - INFO - Placing LIMIT SELL order: 0.001 BTCUSDT
+2026-07-01 12:43:30,458 - binance_bot - DEBUG - Request parameters: {'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': 0.001, 'price': 100000.0, 'timeInForce': 'GTC'}
+2026-07-01 12:43:31,474 - binance_bot - INFO - Order placed successfully. ID: 18179800894
+2026-07-01 12:43:31,474 - binance_bot - DEBUG - API response: {'orderId': 18179800894, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'Szl4bfahdyPLPislEcsBef', 'price': '100000.00', 'origQty': '0.0010', 'executedQty': '0.0000', 'cumQty': '0.0000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1782890011274}
