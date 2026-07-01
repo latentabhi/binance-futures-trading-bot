@@ -39,3 +39,13 @@ def execute_trade(symbol: str, side: str, type: str, qty: float, price: float = 
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         raise e
+
+def get_order_status(symbol: str, order_id: int):
+    client = ClientWrapper().get()
+    try:
+        res = client.query_order(symbol=symbol.upper(), orderId=order_id)
+        logger.debug(f"Query response: {res}")
+        return res
+    except Exception as e:
+        logger.error(f"Failed to query order: {e}")
+        return None

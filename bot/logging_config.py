@@ -19,6 +19,9 @@ def setup_logging(log_file="trading_bot.log"):
 
     log.addHandler(fh)
     log.addHandler(ch)
+    
+    # prevent logs from propagating to root logger and cluttering console
+    log.propagate = False
 
     return log
 
